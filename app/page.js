@@ -1,11 +1,15 @@
-import React from "react";
+"use client";
 
-const Home = () => {
+import NextAuthLoginButton from "./login-btn";
+import { useState } from "react";
+
+const page = () => {
   return (
     <div>
-      <h1>Hello z app directory</h1>
+      <h1>Hello</h1>
+      <NextAuthLoginButton />
     </div>
   );
 };
 
-export default Home;
+export default page;
