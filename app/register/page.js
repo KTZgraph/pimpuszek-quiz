@@ -6,7 +6,9 @@ import FormInput from "../../components/atoms/FormInput";
 const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
-    userEmail: "ciociagrazynka9@gmail.com",
+    // testowy email, bo miało byc potwierdzenie, tylko 8 żeby komuś nie spamować
+    userEmail: "ciociagrazynka8@gmail.com",
+    // losowae hasło do polityki potencjalnej z  https://www.lastpass.com/features/password-generator#generatorTool
     userPassword: "39WYs62%rmb^39WYs62%rmb^",
     userPasswordConfirm: "39WYs62%rmb^39WYs62%rmb^",
   });
