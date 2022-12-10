@@ -20,3 +20,7 @@ npm install bcrypt
 
 - customowa strona
   https://next-auth.js.org/configuration/pages
+
+# React Context API Tutorial | Quick and Easy
+
+https://www.youtube.com/watch?v=3yrMcx02jXs

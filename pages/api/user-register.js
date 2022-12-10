@@ -5,6 +5,7 @@ const UserModel = require("../../services/mongodb/mongodb-schema-user");
 export default async function handler(req, res) {
   const { email, password } = req.body;
   console.log(" req.body: ", req.body);
+
   const user = await UserModel.findOne({ email: email });
 
   if (user) {
