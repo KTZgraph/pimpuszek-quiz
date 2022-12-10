@@ -33,10 +33,17 @@ const RegisterPage = () => {
     try {
       setLoading(true);
       //   https://supabase.com/docs/reference/javascript/auth-signup
-      const { data, error } = await supabase.auth.signUp({
-        email: userData.email,
-        password: userData.password,
+      // const { data, error } = await supabase.auth.signUp({
+      //   email: userData.email,
+      //   password: userData.password,
+      // });
+
+      // async function signInWithEmail() {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: "example@email.com",
+        password: "example-password",
       });
+      // }
 
       console.log("DATA: ", data);
 
