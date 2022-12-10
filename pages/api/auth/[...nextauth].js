@@ -24,25 +24,25 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         console.log("------------- authorize ------------------");
-        const { email, password } = credentials;
+        const { email, password: inputPassword } = credentials;
         const user = await UserModel.findOne({ email });
         if (!user) {
           throw new Error("Jeszce nie zarejestrwany user");
         }
         if (user) {
-          return signInUser({ user, password });
+          return signInUser({ user, inputPassword });
         }
       },
     }),
   ],
 };
 
-const signInUser = async ({ user, password }) => {
+const signInUser = async ({ user, inputPassword }) => {
   if (!user.password) {
     throw new Error("Prosze podaj hasło");
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(inputPassword, user.password);
   if (!isMatch) {
     throw new Error("Niepoprawny login lub hasło");
   }
