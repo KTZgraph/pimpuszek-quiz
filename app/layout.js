@@ -1,10 +1,12 @@
-// tu dopatrzeć wrapper na protected route
+"use client";
+
+// https://beta.nextjs.org/docs/api-reference/use-pathname
 import { usePathname } from "next/navigation";
 
 import Providers from "./providers";
-import Header from "../components/layout/Header";
-
-const noAuthRequiredPageList = ["/login", "/signup"];
+import Navbar from "../components/layout/Navbar";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+const noAuthRequiredPageList = ["/", "/register"];
 
 // tu trzeba zimportować style
 import "../styles/globals.css";
@@ -18,16 +20,14 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         <Providers>
-          <Header />
-          <main className="layout__main">{children}</main>
-          {/* <main className="layout__main">
+          <Navbar />
+          <main className="layout__main">
             {noAuthRequiredPageList.includes(pathname) ? (
               children
             ) : (
-              // sprawdzm logowanie dopiero gdy jest to potrzebne
               <ProtectedRoute>{children}</ProtectedRoute>
             )}
-          </main> */}
+          </main>
         </Providers>
       </body>
     </html>
