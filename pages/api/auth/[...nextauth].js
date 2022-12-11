@@ -6,7 +6,8 @@ https://www.youtube.com/watch?v=EL8eXM1sGaU
 https://www.youtube.com/watch?v=S1D9IQM8bFA&list=PLB_Wd4-5SGAbcvGsLzncFCrh-Dyt7wr5F&index=12
 */
 
-import { setCookie } from "nookies";
+// https://github.com/nextauthjs/next-auth/issues/243
+import jwt from "next-auth/jwt";
 
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -29,61 +30,54 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        setCookie({ res }, "name", "value", {
-          maxAge: 2 * 24 * 60 * 60,
-          path: "/",
-          // httpOnly: true,
-          httpOnly: false,
-        });
+        // setCookie({ res }, "name", "value", {
+        //   maxAge: 2 * 24 * 60 * 60,
+        //   path: "/",
+        //   // httpOnly: true,
+        //   httpOnly: false,
+        // });
 
         const { email, password: inputPassword } = credentials;
         const user = await UserModel.findOne({ email });
         if (!user) {
           throw new Error("Jeszce nie zarejestrwany user");
         }
-        if (account) {
-          token.accessToken = account.access_token;
-          token.id = profile.id;
-        }
 
         if (user) {
           // https://github.com/nextauthjs/next-auth/discussions/4428
-
           return signInUser({ user, inputPassword });
         }
       },
     }),
   ],
-
+  session: {
+    // https://stackoverflow.com/questions/73933990/next-auth-session-token-invalid-signature-on-jwt-io
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60,
+  },
   callbacks: {
-    // https://github.com/nextauthjs/next-auth/issues/608
-    async session({ session, user, token }) {
-      console.log("here2");
-      console.log(token);
-      console.log(session);
-      if (!session?.user || !token?.account) {
-        return session;
-      }
+    async session({ session, token, user }) {
+      session.user.id = token.id;
+      session.accessToken = token.AccessToken;
+      session.jti = token.jti;
 
-      session.user.id = token.account.id;
-      session.accessToken = token.account.accessToken;
+      session.jwt = `Tu ma być ${resultJWT}`;
+      console.log("session token: ", session.accessToken);
 
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
-        // https://youtu.be/S1D9IQM8bFA?t=1370
-        token.id = user._id || user.id;
+        token.id = user.id;
+        user.myToken = token;
       }
-      console.log("here");
-      console.log(token);
-      console.log(user);
-      const isSignIn = user ? true : false;
-      // Add auth_time to token on signin in
-      if (isSignIn) {
-        token.auth_time = Math.floor(Date.now() / 1000);
+      if (account) {
+        token.access_token = account.access_token;
       }
-      return Promise.resolve(token);
+
+      // https://github.com/nextauthjs/next-auth/issues/243
+      console.log("TOKEN", token, user);
+      return token;
     },
   },
 };

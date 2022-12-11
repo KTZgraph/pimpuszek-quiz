@@ -53,8 +53,9 @@ const Login = () => {
       if (!result.error) {
         // https://youtu.be/Yq9xyZ63Fgc?t=554
         const session = await getSession();
-        const { data, status } = session;
-        console.log("LOIGN, ", { data, status });
+        setUserLogin(session);
+
+        cookies.set("chyba_jti", session.jti);
 
         console.log("LOIGN session: ", session);
         dispatch({ type: authConstants.LOGIN_SUCCESS, payload: session });

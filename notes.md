@@ -1,3 +1,27 @@
+# JWT vs JWE vs JTi
+
+Trudne ;/
+
+https://security.stackexchange.com/questions/124624/how-does-jti-prevent-a-jwt-from-being-replayed
+
+```javascript
+TOKEN {
+  email: 'test@test.com',
+  sub: '6395020bc0a761caa9cd7c80',
+  id: '6395020bc0a761caa9cd7c80',
+  iat: 1670774569,
+  exp: 1673366569,
+  jti: '004440cb-6b4b-401c-8acd-4612391eafda'
+}
+```
+
+https://stackoverflow.com/questions/28907831/how-to-use-jti-claim-in-a-jwt
+The jti claim is best suited for refresh tokens. That gives you the ability to revoke access while minimizing the number of database calls made.
+
+doczytać
+https://stackoverflow.com/questions/73933990/next-auth-session-token-invalid-signature-on-jwt-io
+https://dinochiesa.github.io/jwt/
+
 # COOKIE jwt
 
 How to store JWT Tokens in React Using Cookies | ReactJS
