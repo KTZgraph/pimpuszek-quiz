@@ -34,3 +34,8 @@ https://www.youtube.com/watch?v=S1D9IQM8bFA
 # TODO JWT - chyba złoto
 
 - https://www.youtube.com/watch?v=Wq2jAX2D8O0&list=PLB_Wd4-5SGAbcvGsLzncFCrh-Dyt7wr5F&index=10
+
+# BUG https://pimpuszek-quiz.vercel.app/api/auth/error
+
+# https://stackoverflow.com/questions/68029244/how-to-fix-api-auth-error-issue-of-next-auth-in-production
+# https://stackoverflow.com/questions/71600978/missingsecret-missingsecreterror-please-define-a-secret-in-production/71606643#71606643

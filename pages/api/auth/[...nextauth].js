@@ -18,6 +18,7 @@ connectMongodb().catch((error) => console.error(error));
 const UserModel = require("../../../services/mongodb/mongodb-schema-user");
 
 export const authOptions = {
+  secret: process.env.NEXT_PUBLIC_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
