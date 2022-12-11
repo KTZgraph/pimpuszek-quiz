@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Providers from "./providers";
 import Navbar from "../components/layout/Navbar";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
-const noAuthRequiredPageList = ["/", "/register"];
+const noAuthRequiredPageList = ["/", "/register", "/login"];
 
 // tu trzeba zimportować style
 import "../styles/globals.css";

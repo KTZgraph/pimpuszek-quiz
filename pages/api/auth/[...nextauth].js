@@ -1,6 +1,9 @@
 /*
 https://www.youtube.com/watch?v=k_x6kGHhEns
 https://www.youtube.com/watch?v=EL8eXM1sGaU
+
+// NextJS Project Tutorial - User Authentication using JWT - 12
+https://www.youtube.com/watch?v=S1D9IQM8bFA&list=PLB_Wd4-5SGAbcvGsLzncFCrh-Dyt7wr5F&index=12
 */
 
 import NextAuth from "next-auth";
@@ -17,7 +20,7 @@ const UserModel = require("../../../services/mongodb/mongodb-schema-user");
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: "myCredetials",
+      name: "Credentials",
       credentials: {
         email: { label: "email", type: "email", placeholder: "email" },
         password: { label: "Password", type: "password" },
@@ -30,6 +33,7 @@ export const authOptions = {
           throw new Error("Jeszce nie zarejestrwany user");
         }
         if (user) {
+          // signInUser zwraca usera
           return signInUser({ user, inputPassword });
         }
       },
