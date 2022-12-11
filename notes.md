@@ -1,4 +1,12 @@
-#T TODO fiszki z kropowanych z zdjęć skanów notatek np wzory z
+# COOKIE jwt
+
+How to store JWT Tokens in React Using Cookies | ReactJS
+
+https://www.youtube.com/watch?v=Avfa7RrPx_Q
+npm i universal-cookie
+npm i jwt-decode
+
+# TODO fiszki z kropowanych z zdjęć skanów notatek np wzory z
 
 # 1. Deploy Next.js to Vercel
 
@@ -38,6 +46,7 @@ https://www.youtube.com/watch?v=S1D9IQM8bFA
 # BUG https://pimpuszek-quiz.vercel.app/api/auth/error
 
 # https://stackoverflow.com/questions/68029244/how-to-fix-api-auth-error-issue-of-next-auth-in-production
+
 # https://stackoverflow.com/questions/71600978/missingsecret-missingsecreterror-please-define-a-secret-in-production/71606643#71606643
 
 # NextJS Project Tutorial - Logged In User Still See Sign in Page - Fixed - 15
