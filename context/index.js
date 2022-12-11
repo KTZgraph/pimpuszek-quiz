@@ -13,8 +13,10 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: {
-          authenticating: true,
+          // authenticating: true,
           ...state.user,
+          // https://youtu.be/Pjx-T5ySwAA?t=120
+          authenticating: true,
         },
       };
     }
