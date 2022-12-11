@@ -24,7 +24,9 @@ const reducer = (state, action) => {
         ...state,
         user: {
           // https://youtu.be/Yq9xyZ63Fgc?t=682
-          ...action.payload,
+          // ...action.payload,
+          // https://youtu.be/Yq9xyZ63Fgc?t=877
+          ...action.payload.user,
           ...state.user,
 
           authenticating: false,

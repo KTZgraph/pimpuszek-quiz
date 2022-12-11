@@ -57,11 +57,13 @@ export const authOptions = {
       console.log("user z session z ...nextatuth ", user);
 
       // // BUG nagle nic nie wyświelta
-      if (user && user._id) {
-        console.log("session ...nextauth.js user && user._id");
-        session.user.id = user._id;
+      if (user && user.id) {
+        console.log(
+          "\n\n\n\n\n\n\n\n\nsession ...nextauth.js user && user._id"
+        );
+        session.user.id = user.id;
         session.user.email = user.email;
-        session.user.email = user.image;
+        session.user.image = user.image;
       }
       return session;
     },

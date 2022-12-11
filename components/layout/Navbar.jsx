@@ -8,16 +8,19 @@ import { useStore } from "../../context/index";
 const Navbar = () => {
   const [state, dispatch] = useStore();
   console.log("useStore navbars:", { state });
+  // const user = getValue
 
   return (
     <div>
+      {JSON.stringify(state)}
+
       <div>
-        {state.authenticated && <Link href="/lessons">lessons link</Link>}
-        {state.authenticated && (
+        {state.user.authenticated && <Link href="/lessons">lessons link</Link>}
+        {state.user.authenticated && (
           <button onClick={() => signOut()}>Wyloguj ZALOGOWANY</button>
         )}
       </div>
-      {!state.authenticated && (
+      {!state.user.authenticated && (
         <Link href="/login">zaloguj się NIEZALOGOWANY</Link>
       )}
 
