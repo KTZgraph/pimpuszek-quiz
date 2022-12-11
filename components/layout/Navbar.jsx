@@ -11,7 +11,6 @@ const Navbar = () => {
   const userEmail = useContext(UserEmailProvider);
   // console.log(data);
 
-  
   return (
     <div>
       {status === "authenticated" && (
@@ -23,7 +22,8 @@ const Navbar = () => {
         </div>
       )}
       {status === "unauthenticated" && (
-        <button onClick={() => signIn()}>Zaloguj się</button>
+        // <button onClick={() => signIn()}>Zaloguj się</button>
+        <Link href="/login">zaloguj się</Link>
       )}
       <hr />
     </div>

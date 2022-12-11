@@ -13,17 +13,22 @@ const Login = () => {
   });
 
   const handleLogin = async (e) => {
+    // BUG - e.preventDefault(); PSUJE
     e.preventDefault();
     console.log("Logowanie poczatek");
     const nextAuthPayload = { email: data.email, password: data.password };
     // https://next-auth.js.org/getting-started/client#signin
     try {
-      signIn("credentials", { ...nextAuthPayload, redirect: false });
+      signIn("credentials", {
+        ...nextAuthPayload,
+        // redirect: false,
+        callbackUrl: "/",
+      });
     } catch (err) {
       console.log(
         `signIn("credentials", { ...nextAuthPayload, redirect: false });")`
       );
-      console.log(error);
+      console.log(err);
     }
     console.log("Logowanie koniec");
 
