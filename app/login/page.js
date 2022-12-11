@@ -17,8 +17,10 @@ const Login = () => {
     password: "password",
   });
 
-  const handleLogout = () => {
-    setUserLogin(null);
+  const handleLogout = async () => {
+    const logoutResponse = await axios.get("/api/auth/logout");
+
+    console.log("LOGUT RESPONSE: ", logoutResponse);
   };
 
   const handleLogin = async (e) => {

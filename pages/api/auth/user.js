@@ -9,7 +9,7 @@ export default function handler(req, res) {
   //   pobranie cookie
   const { cookies } = req;
 
-  const jwt = cookies.tutorialjwt;
+  const jwt = cookies.pimpuszekJWT;
   console.log("JWT ", jwt);
   res.json({ cookies: cookies });
 }
