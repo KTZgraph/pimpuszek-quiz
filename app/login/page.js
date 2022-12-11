@@ -19,10 +19,16 @@ const Login = () => {
     const nextAuthPayload = { email: data.email, password: data.password };
     // https://next-auth.js.org/getting-started/client#signin
     try {
+      // WARNING credentials z małej litery - NIE poorywa się z nazwą z a [...nextauth].js
+      //   signIn("credentials", {
+      //     ...nextAuthPayload,
+      //     // redirect: false,
+      //     callbackUrl: "/lessons",
+      //   });
       signIn("credentials", {
         ...nextAuthPayload,
-        // redirect: false,
-        callbackUrl: "/",
+        redirect: false,
+        // callbackUrl: "/lessons",
       });
     } catch (err) {
       console.log(

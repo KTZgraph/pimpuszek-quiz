@@ -15,6 +15,12 @@ const notionQuizzSchema = new mongoose.Schema({
   //   dołożyć daty created i modified
   //   email właściciela wuizu
   emailOwner: { type: String },
+  // TODO dołożyć tagi do quizu
+  // tags: [
+  //   {
+  //     type: String,
+  //   },
+  // ],
 });
 
 // BUG error - OverwriteModelError: Cannot overwrite `NotionQuizzes` model once compiled.

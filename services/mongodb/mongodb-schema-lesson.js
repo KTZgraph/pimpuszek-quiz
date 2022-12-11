@@ -7,6 +7,13 @@ const lessonSchema = new mongoose.Schema({
   title: String,
   description: String,
   emailOwner: { type: String },
+  // TODO dołożyć taki i przedmiot
+  // tags: [
+  //   {
+  //     type: String,
+  //   },
+  // ],
+  // subject: String
 });
 
 module.exports =

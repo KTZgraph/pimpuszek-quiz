@@ -39,6 +39,22 @@ export const authOptions = {
       },
     }),
   ],
+  // https://next-auth.js.org/configuration/callbacks
+  // https://youtu.be/S1D9IQM8bFA?t=1166
+
+    callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
+    async session({ session, user, token }) {
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      return token
+    }
 };
 
 const signInUser = async ({ user, inputPassword }) => {
