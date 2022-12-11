@@ -1,3 +1,12 @@
+# Tu może być JWT rozwiazanie
+
+- https://www.youtube.com/watch?v=T6fRWZWrJzI
+- https://www.youtube.com/watch?v=DHZSYYTCTbA
+- https://www.youtube.com/watch?v=Z23eBe-yGTY
+
+- https://www.youtube.com/watch?v=DHZSYYTCTbA
+- https://www.youtube.com/@computersciencedev1096
+
 # JWT vs JWE vs JTi
 
 Trudne ;/
