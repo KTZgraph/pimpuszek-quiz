@@ -2,10 +2,9 @@
 // https://github.com/CompSciDev/Next.js-jwt-http-cookie-only/blob/main/nextjs-auth/pages/api/auth/login.js
 // npm i jsonwebtoken
 // npm i cookie
-import { sign } from "jsonwebtoken";
-import { serialize } from "cookie";
 
-const secret = process.env.SECRET;
+import { setUserCookie } from "../../../helpers/auth";
+import { jsonResponse } from "../../../helpers/utils";
 
 export default async function handler(req, res) {
   const { username, password } = req.body;
@@ -14,28 +13,13 @@ export default async function handler(req, res) {
   // if a user with this username
   // and password exists
   //   if (username === "test@test.com" && password === "password") {
-  const token = sign(
-    {
-      exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
-      username: username,
-    },
-    secret
-  );
 
-  // BUG - TutorialJWT saem litery w nazwie
-  const serialised = serialize("pimpuszekJWT", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: "strict",
-    maxAge: 60 * 60 * 24 * 30,
-    path: "/",
-  });
-
-  res.setHeader("Set-Cookie", serialised);
-  //   res.cookie("tutorialjwt", serialised);
-
-  res.status(200).json({ message: "Success!", data: serialised });
-  //   } else {
-  // res.json({ message: "Invalid credentials!" });
-  //   }
+  try {
+    return await setUserCookie(
+      res.status(200).json({ message: "Dobrze!", data: "rte" })
+    );
+  } catch (err) {
+    console.error(err);
+    return res.status(200).json({ message: "ZLE!", data: err });
+  }
 }

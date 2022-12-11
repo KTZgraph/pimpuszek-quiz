@@ -1,8 +1,3 @@
-import { sign } from "jsonwebtoken";
-import { serialize } from "cookie";
-
-const secret = process.env.SECRET;
-
 export default function handler(req, res) {
   // WARNING - chrioniony endpoint
 
