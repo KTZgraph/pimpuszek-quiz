@@ -33,6 +33,18 @@ const Login = () => {
       },
     });
 
+    console.log("robie axiosa");
+    const loginResponse = await axios.post(
+      "/api/auth/login",
+      {
+        email: data.email,
+        password: data.password,
+      },
+      { withCredentials: true }
+    );
+
+    console.log("LOGIN RESPONSE: ", loginResponse);
+
     // dispatch({
     //   type: authConstants.LOGIN_FAILURE,
     //   payload: "Jakiś bład na sztywno",
