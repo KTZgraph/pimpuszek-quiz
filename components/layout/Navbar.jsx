@@ -5,11 +5,19 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { UserEmailProvider } from "../../context/UserEmailContext";
 
 import "./Navbar.scss";
+import { useStore } from "../../context/index";
 
 const Navbar = () => {
   const { status, data } = useSession();
   const userEmail = useContext(UserEmailProvider);
   // console.log(data);
+
+  try {
+    const [state, dispatch] = useStore();
+    console.log({ state });
+  } catch (err) {
+    console.log("ERROR navbars: ", err);
+  }
 
   return (
     <div>
