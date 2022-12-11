@@ -46,7 +46,6 @@ export default async function handler(req, res) {
       );
 
       const newQuiz = await getNotionQuiz({emailOwner, lessonName, databaseId});
-      console.log("newQuiz", newQuiz);
       if (newQuiz) {
         res.status(201).json({
           message: `Zapisano dp bazy : ${lessonName} ${notionUrl} ${emailOwner}`,

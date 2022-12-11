@@ -47,7 +47,6 @@ export const saveToDatabase = async (
   await NotionQuizzModel.create(newQuizData, function (err, newQuizData) {
     if (err) return err;
     // res.status(201).json({ data: newQuizData._id });
-    console.log("Udało się dodac quiz");
   });
 };
 
@@ -60,9 +59,6 @@ export const getNotionQuiz = async (args) => {
     notionDatabaseId: notionDatabaseId,
   });
 
-  console.log("responseMongo", responseMongo);
-  console.log("--------\n\n\n\n\n\n\n\n");
-  console.log(lessonName, notionDatabaseId, emailOwner);
   return responseMongo;
 };
 

@@ -28,8 +28,6 @@ export const getNotionQuizData = (
     row["quiz__triesSum"] = 0;
   }
 
-  console.log("quizData: ", quizData);
-
   return {
     quizColumnList: quizColumnList,
     quizData: quizData,

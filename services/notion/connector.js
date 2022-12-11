@@ -58,7 +58,6 @@ async function handler(req, res) {
       parsedData.push(tmp);
     }
 
-    console.log("POST");
     const jsonFilepath = await saveToJsonFile(
       lessonName,
       databaseId,

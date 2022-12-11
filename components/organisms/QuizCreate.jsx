@@ -18,8 +18,6 @@ const QuizCreate = ({ emailOwner, lessonName }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("dodwanie nowego quizu");
-    // czyszczeue
     setPreviewData({
       columns: [],
       data: [],
@@ -33,17 +31,9 @@ const QuizCreate = ({ emailOwner, lessonName }) => {
       answerColumnName,
       typeColumnName,
     });
-
-    console.log("===============================");
-    console.log(response);
-
     if (response.status === 201) {
-      // to przejsć na stronę pliku
-      console.log("201");
-      console.log(response);
+      // TODO redirect
     }
-
-    console.log(response.data?.data?.data);
 
     const previewData = response.data?.data?.data;
     const uniqueColumns = response.data?.data?.columns;

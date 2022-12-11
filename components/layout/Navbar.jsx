@@ -6,8 +6,6 @@ import { useStore } from "../../context/index";
 
 const Navbar = () => {
   const [state, dispatch] = useStore();
-  console.log("useStore navbars:", { state });
-  // const user = getValue
 
   const handleLogout = (e) => {
     console.log("Wylogowywanie");

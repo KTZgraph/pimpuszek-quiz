@@ -12,7 +12,6 @@ const SingleLesson = ({ params: { lessonName } }) => {
       try {
         setUserEmail(state.user.email);
       } catch (err) {
-        console.log(err);
         setUserEmail("");
       }
     };

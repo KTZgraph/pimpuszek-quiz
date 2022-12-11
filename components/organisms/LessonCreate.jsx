@@ -33,7 +33,6 @@ const LessonCreate = ({ userEmail }) => {
       emailOwner: data.emailOwner,
     });
 
-    // console.log("response: ", response);
   };
 
   return (
