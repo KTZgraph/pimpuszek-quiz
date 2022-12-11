@@ -12,11 +12,6 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const encryptedPassword = "DSfsd";
-
-    console.log(data.email);
-    console.log(encryptedPassword);
-
     const response = await axios.post("/api/user-register", {
       email: data.email,
       password: data.password,

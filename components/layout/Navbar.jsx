@@ -9,8 +9,7 @@ import "./Navbar.scss";
 const Navbar = () => {
   const { status, data } = useSession();
   const userEmail = useContext(UserEmailProvider);
-  console.log("userEmail", userEmail);
-  console.log(data);
+  // console.log(data);
 
   
   return (

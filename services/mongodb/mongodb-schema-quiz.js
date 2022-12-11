@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 const notionQuizzSchema = new mongoose.Schema({
   lessonName: String,
+  lessonId: String,
   notionDatabaseId: String,
+  notionDatabaseUrl: String,
   columns: [
     {
       type: String,

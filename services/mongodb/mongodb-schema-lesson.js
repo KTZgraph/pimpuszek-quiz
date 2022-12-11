@@ -6,8 +6,6 @@ const lessonSchema = new mongoose.Schema({
   classDate: String,
   title: String,
   description: String,
-  notionDatabaseId: String,
-  notionQuizList: [{ type: mongoose.Schema.Types.Mixed }],
   emailOwner: { type: String },
 });
 
