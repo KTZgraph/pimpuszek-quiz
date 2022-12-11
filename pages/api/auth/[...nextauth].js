@@ -6,6 +6,8 @@ https://www.youtube.com/watch?v=EL8eXM1sGaU
 https://www.youtube.com/watch?v=S1D9IQM8bFA&list=PLB_Wd4-5SGAbcvGsLzncFCrh-Dyt7wr5F&index=12
 */
 
+import { setCookie } from "nookies";
+
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
@@ -27,12 +29,26 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
+        setCookie({ res }, "name", "value", {
+          maxAge: 2 * 24 * 60 * 60,
+          path: "/",
+          // httpOnly: true,
+          httpOnly: false,
+        });
+
         const { email, password: inputPassword } = credentials;
         const user = await UserModel.findOne({ email });
         if (!user) {
           throw new Error("Jeszce nie zarejestrwany user");
         }
+        if (account) {
+          token.accessToken = account.access_token;
+          token.id = profile.id;
+        }
+
         if (user) {
+          // https://github.com/nextauthjs/next-auth/discussions/4428
+
           return signInUser({ user, inputPassword });
         }
       },
@@ -55,10 +71,10 @@ export const authOptions = {
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      // if (user) {
-      //   // https://youtu.be/S1D9IQM8bFA?t=1370
-      //   token.id = user._id || user.id;
-      // }
+      if (user) {
+        // https://youtu.be/S1D9IQM8bFA?t=1370
+        token.id = user._id || user.id;
+      }
       console.log("here");
       console.log(token);
       console.log(user);

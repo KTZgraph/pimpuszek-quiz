@@ -46,6 +46,8 @@ const Login = () => {
         // callbackUrl: "/lessons",
       });
 
+      console.log("LOGIN result ", result);
+
       //   error z pimpuszek-quiz\context\index.js
       //   https://youtu.be/Yq9xyZ63Fgc?t=479
       if (!result.error) {
@@ -60,27 +62,23 @@ const Login = () => {
 
         const MOJ_JWT_TOKEN_NA_SZTYWNO =
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
-
-        // decode jwt
         const decoded = jwt(MOJ_JWT_TOKEN_NA_SZTYWNO);
-        // set user state
         setUserLogin(decoded);
-        // set cookie
         cookies.set("jwt_authorization", MOJ_JWT_TOKEN_NA_SZTYWNO, {
           // cook ie jest w milisekundach
           expires: new Date(decoded.exp * 10000000000),
         });
 
-        router.push("/lessons");
+        // router.push("/lessons");
       } else {
         dispatch({
           type: authConstants.LOGIN_FAILURE,
           payload: result.error,
         });
 
-        console.setAuthError(result.error);
+        setAuthError(result.error);
         console.log("bład z logowania!!! ");
-        console.log(result.err);
+        console.log(result.error);
         router.push("/error-page");
       }
     } catch (err) {
