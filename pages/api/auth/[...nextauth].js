@@ -27,54 +27,47 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("------------- authorize ------------------");
         const { email, password: inputPassword } = credentials;
         const user = await UserModel.findOne({ email });
         if (!user) {
           throw new Error("Jeszce nie zarejestrwany user");
         }
         if (user) {
-          // signInUser zwraca usera
           return signInUser({ user, inputPassword });
         }
       },
     }),
   ],
-  // https://next-auth.js.org/configuration/callbacks
-  // https://youtu.be/S1D9IQM8bFA?t=1166
 
   callbacks: {
-    // WARNING signIn i redirect NIE NADPISUJEMY
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   return true;
-    // },
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl;
-    // },
+    // https://github.com/nextauthjs/next-auth/issues/608
     async session({ session, user, token }) {
-      console.log("\n\n\n\n\nSESSION", { session, user });
-      // BUG - trzeba wywoąłć np w /login żeby zobaczyć
-      //       const sessionUser = await getSession();
-      console.log("user z session z ...nextatuth ", user);
-
-      // // BUG nagle nic nie wyświelta
-      if (user && user.id) {
-        console.log(
-          "\n\n\n\n\n\n\n\n\nsession ...nextauth.js user && user._id"
-        );
-        session.user.id = user.id;
-        session.user.email = user.email;
-        session.user.image = user.image;
+      console.log("here2");
+      console.log(token);
+      console.log(session);
+      if (!session?.user || !token?.account) {
+        return session;
       }
+
+      session.user.id = token.account.id;
+      session.accessToken = token.account.accessToken;
+
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("\n\n\n\n\nJWT", { token, user });
-      if (user && user._id) {
-        // https://youtu.be/S1D9IQM8bFA?t=1370
-        token.id = user._id;
+      // if (user) {
+      //   // https://youtu.be/S1D9IQM8bFA?t=1370
+      //   token.id = user._id || user.id;
+      // }
+      console.log("here");
+      console.log(token);
+      console.log(user);
+      const isSignIn = user ? true : false;
+      // Add auth_time to token on signin in
+      if (isSignIn) {
+        token.auth_time = Math.floor(Date.now() / 1000);
       }
-      return token;
+      return Promise.resolve(token);
     },
   },
 };

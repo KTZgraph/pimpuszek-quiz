@@ -20,7 +20,6 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logowanie poczatek");
     const nextAuthPayload = { email: data.email, password: data.password };
     // https://next-auth.js.org/getting-started/client#signin
 
@@ -40,8 +39,16 @@ const Login = () => {
       if (!result.error) {
         // https://youtu.be/Yq9xyZ63Fgc?t=554
         const session = await getSession();
+        const { data, status } = session;
+        console.log("LOIGN, ", { data, status });
+
+        console.log("LOIGN session: ", session);
         dispatch({ type: authConstants.LOGIN_SUCCESS, payload: session });
         // przekierowanie jak sie wszystko uda
+
+        const MOJ_JWT_TOKEN_NA_SZTYWNO =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+
         router.push("/lessons");
       } else {
         dispatch({
@@ -60,9 +67,6 @@ const Login = () => {
       );
       console.log(err);
     }
-    console.log("Logowanie koniec");
-
-    // console.log("response: ", response);
   };
 
   return (
