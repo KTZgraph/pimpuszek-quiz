@@ -1,29 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
-import { useSession } from "next-auth/react";
-import { UserEmailProvider } from "../../context/UserEmailContext";
 import LessonList from "../../components/organisms/LessonList";
 
 const Lessons = () => {
-  const [userEmail, setUserEmail] = useState("");
-  const { data } = useSession();
-  const czyNiePuste = useContext(UserEmailProvider);
-
-  useEffect(() => {
-    const fetchUserEmail = async () => {
-      try {
-        setUserEmail(data?.user?.email);
-      } catch (err) {
-        console.log(err);
-        setUserEmail("");
-      }
-    };
-
-    fetchUserEmail();
-  }, [data]);
+  const [userEmail, setUserEmail] = useState("email na sztynwo z Lessons page");
 
   if (!userEmail) return <p>...Loading</p>;
   return (

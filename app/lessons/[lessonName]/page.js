@@ -1,14 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
 import QuizCreate from "../../../components/organisms/QuizCreate";
 import { useStore } from "../../../context";
 
 const SingleLesson = ({ params: { lessonName } }) => {
   const [state, dispatch] = useStore();
   const [userEmail, setUserEmail] = useState(state.user.email);
-  const { data } = useSession();
 
   useEffect(() => {
     const fetchUserEmail = async () => {

@@ -1,11 +1,9 @@
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useStore } from "../../context";
 
 const ProtectedRoute = ({ children }) => {
   const router = useRouter();
-  // const { status } = useSession();
 
   const [state, dispatch] = useStore();
 

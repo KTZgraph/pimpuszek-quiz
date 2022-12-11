@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 import "./Navbar.scss";
 import { useStore } from "../../context/index";
@@ -10,6 +9,10 @@ const Navbar = () => {
   console.log("useStore navbars:", { state });
   // const user = getValue
 
+  const handleLogout = (e) => {
+    console.log("Wylogowywanie");
+  };
+
   return (
     <div>
       {JSON.stringify(state)}
@@ -17,7 +20,7 @@ const Navbar = () => {
       <div>
         {state.user.authenticated && <Link href="/lessons">lessons link</Link>}
         {state.user.authenticated && (
-          <button onClick={() => signOut()}>Wyloguj ZALOGOWANY</button>
+          <button onClick={(e) => handleLogout(e)}>Wyloguj ZALOGOWANY</button>
         )}
       </div>
       {!state.user.authenticated && (
