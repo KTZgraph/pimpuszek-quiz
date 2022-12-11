@@ -1,3 +1,24 @@
+# Vercel deployment https://github.com/nextauthjs/next-auth/issues/3245
+
+https://stackoverflow.com/questions/71600978/missingsecret-missingsecreterror-please-define-a-secret-in-production/71606643#71606643
+
+```
+Here is the Fix,
+
+In .env file (or your vercel env) add NEXT_PUBLIC_SECRET=anything (Make sure you have NEXT_PUBLIC_SECRET name as it is)
+
+Add a secret option in [...nextauth].js
+
+providers: [//Your providers],
+
+secret: process.env.NEXT_PUBLIC_SECRET
+
+
+
+```
+
+BUG - doczytać https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

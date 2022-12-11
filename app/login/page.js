@@ -19,7 +19,6 @@ const Login = () => {
   });
 
   const handleLogin = async (e) => {
-    // BUG - e.preventDefault(); PSUJE
     e.preventDefault();
     console.log("Logowanie poczatek");
     const nextAuthPayload = { email: data.email, password: data.password };
