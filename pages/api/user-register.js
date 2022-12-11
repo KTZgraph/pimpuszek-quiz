@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 const UserModel = require("../../services/mongodb/mongodb-schema-user");
 
 export default async function handler(req, res) {
+  res.status(501).json({ message: "Nie ma rejestrowanka:<" });
+  return;
   const { email, password } = req.body;
   console.log(" req.body: ", req.body);
 
