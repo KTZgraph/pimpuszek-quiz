@@ -42,19 +42,38 @@ export const authOptions = {
   // https://next-auth.js.org/configuration/callbacks
   // https://youtu.be/S1D9IQM8bFA?t=1166
 
-    callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true
-    },
-    async redirect({ url, baseUrl }) {
-      return baseUrl
-    },
+  callbacks: {
+    // WARNING signIn i redirect NIE NADPISUJEMY
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   return true;
+    // },
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl;
+    // },
     async session({ session, user, token }) {
-      return session
+      console.log("\n\n\n\n\nSESSION", { session, user });
+      // BUG - trzeba wywoąłć np w /login żeby zobaczyć
+      //       const sessionUser = await getSession();
+      console.log("user z session z ...nextatuth ", user);
+
+      // // BUG nagle nic nie wyświelta
+      if (user && user._id) {
+        console.log("session ...nextauth.js user && user._id");
+        session.user.id = user._id;
+        session.user.email = user.email;
+        session.user.email = user.image;
+      }
+      return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      return token
-    }
+      console.log("\n\n\n\n\nJWT", { token, user });
+      if (user && user._id) {
+        // https://youtu.be/S1D9IQM8bFA?t=1370
+        token.id = user._id;
+      }
+      return token;
+    },
+  },
 };
 
 const signInUser = async ({ user, inputPassword }) => {
@@ -64,7 +83,13 @@ const signInUser = async ({ user, inputPassword }) => {
 
   const isMatch = await bcrypt.compare(inputPassword, user.password);
   if (!isMatch) {
+    console.log("Niepoprawny login lub hasło");
     throw new Error("Niepoprawny login lub hasło");
+  }
+
+  if (user && isMatch) {
+    // https://youtu.be/S1D9IQM8bFA?t=1290
+    delete user.password;
   }
 
   return user;

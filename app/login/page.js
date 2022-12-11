@@ -4,12 +4,15 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 // https://next-auth.js.org/getting-started/client#signin
-import { signIn } from "next-auth/react";
+// https://youtu.be/S1D9IQM8bFA?t=1370 SESJA
+import { signIn, getSession } from "next-auth/react";
 
 const Login = () => {
+  const router = useRouter();
+  const [authError, setAuthError] = useState("");
   const [data, setData] = useState({
     email: "test@test.com",
-    password: "password",
+    password: "password123",
   });
 
   const handleLogin = async (e) => {
@@ -25,11 +28,24 @@ const Login = () => {
       //     // redirect: false,
       //     callbackUrl: "/lessons",
       //   });
-      signIn("credentials", {
+
+      //   https://youtu.be/S1D9IQM8bFA?t=1576
+
+      const result = await signIn("credentials", {
         ...nextAuthPayload,
         redirect: false,
         // callbackUrl: "/lessons",
       });
+
+      if (result.err) {
+        setAuthError(result.err);
+        console.log("bład z logowania!!! ");
+        console.log(result.err);
+        router.push("/error-page");
+      }
+
+      const sessionUser = await getSession();
+      console.log("sessionUser z page login ", sessionUser);
     } catch (err) {
       console.log(
         `signIn("credentials", { ...nextAuthPayload, redirect: false });")`
@@ -47,6 +63,7 @@ const Login = () => {
       <p>{data.email}</p>
       <p>{data.password}</p>
       <button type="submit">Zaloguj się</button>
+      <p>authError:{authError}</p>
     </form>
   );
 };
