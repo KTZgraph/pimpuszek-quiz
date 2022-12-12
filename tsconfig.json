@@ -26,6 +26,6 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/api/auth/logout.js"
-  ],
+, "middleware.js"  ],
   "exclude": ["node_modules"]
 }

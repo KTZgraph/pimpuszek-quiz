@@ -62,15 +62,13 @@ export const setValidCookie = async (res) => {
 export const removeCookie = async (res) => {
   const expiredCookie = getExpiredCookie();
   res.setHeader("Set-Cookie", expiredCookie);
-  //   res.cookies.set(COOKIE_NAME, "", { httpOnly: true, maxAge: 0 });
-  return res;
 };
 
 export const verifyCookie = async (req) => {
   let isValid = false;
   const { cookies } = req;
   const jwt = cookies[COOKIE_NAME];
-  if (!jwt) return -1;
+  if (!jwt) return false;
 
   try {
     isValid = await verifyToken(jwt);
