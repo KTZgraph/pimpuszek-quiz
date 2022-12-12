@@ -28,7 +28,7 @@ const getSerializedToken = (token) => {
   return serialized;
 };
 
-export const checkIsTokenValid = async (token) => {
+export const verifyToken = async (token) => {
   try {
     await jwtVerify(token, new TextEncoder().encode(SECRET_JWT));
   } catch (error) {
@@ -38,11 +38,16 @@ export const checkIsTokenValid = async (token) => {
   return true;
 };
 
-const getExpiredCookie = (token) => {
-  // res.cookies.set(USER_TOKEN, '', { httpOnly: true, maxAge: 0 })
-  const serialized = serialize(COOKIE_NAME, "", {
+const getExpiredCookie = () => {
+  // https://stackoverflow.com/questions/5285940/correct-way-to-delete-cookies-server-side
+  // https://github.com/vercel/examples/blob/main/edge-functions/jwt-authentication/lib/auth.ts
+  //   Note that you cannot force all browsers to delete a cookie.
+  //   The client can configure the browser in such a way that the cookie persists,
+  //   even if it's expired. Setting the value as described above would solve this problem.
+  const serialized = serialize(COOKIE_NAME, null, {
     httpOnly: true,
-    maxAge: 0,
+    maxAge: -1,
+    path: "/",
   });
 
   return serialized;
@@ -57,17 +62,18 @@ export const setValidCookie = async (res) => {
 export const removeCookie = async (res) => {
   const expiredCookie = getExpiredCookie();
   res.setHeader("Set-Cookie", expiredCookie);
+  //   res.cookies.set(COOKIE_NAME, "", { httpOnly: true, maxAge: 0 });
+  return res;
 };
 
-export const validateCookie = async (req) => {
+export const verifyCookie = async (req) => {
   let isValid = false;
   const { cookies } = req;
   const jwt = cookies[COOKIE_NAME];
-  //   nie ma tokena, to nie ma co robić
   if (!jwt) return -1;
 
   try {
-    isValid = await checkIsTokenValid(jwt);
+    isValid = await verifyToken(jwt);
   } catch (err) {
     isValid = false;
   }
