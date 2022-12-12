@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const Register = () => {
   const [data, setData] = useState({
-    email: "test@test.com",
+    email: "test3@test.com",
     password: "password",
     passwordConfirm: "password",
   });
@@ -17,7 +17,7 @@ const Register = () => {
       return;
     }
 
-    const response = await axios.post("/api/user-register", {
+    const response = await axios.post("/api/auth/register", {
       email: data.email,
       password: data.password,
     });
